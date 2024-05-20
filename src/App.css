@@ -103,3 +103,32 @@ button:hover {
   font-weight: bold;
   color: #333;
 }
+
+/* src/App.css */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #333;
+  color: #fff;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+.navbar .user-info {
+  color: #fff;
+  margin-right: 1rem;
+}
+
+.navbar button {
+  background-color: #555;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
