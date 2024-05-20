@@ -53,8 +53,14 @@ const BlogPost = ({ post }) => {
         </div>
       )}
       <div>
-        <input value={commentText} onChange={(e) => setCommentText(e.target.value)} placeholder="Add a comment" />
-        <button onClick={handleAddComment}>Add Comment</button>
+        {currentUser ? (
+          <>
+            <input value={commentText} onChange={(e) => setCommentText(e.target.value)} placeholder="Add a comment" />
+            <button onClick={handleAddComment}>Add Comment</button>
+          </>
+        ) : (
+          <p>Please log in to add a comment.</p>
+        )}
       </div>
       <CommentList comments={post.comments || []} />
     </div>

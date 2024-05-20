@@ -1,11 +1,8 @@
-// src/components/BlogPostList.js
-import React, { useContext } from 'react';
-import { BlogContext } from '../context/BlogContext';
+// src/components/BlogPostList.jsx
+import React from 'react';
 import BlogPost from './BlogPost';
 
-const BlogPostList = () => {
-  const { posts } = useContext(BlogContext);
-
+const BlogPostList = ({ posts }) => {
   return (
     <div>
       {posts.map(post => (
