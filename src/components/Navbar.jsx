@@ -1,4 +1,4 @@
-// src/components/Navbar.js
+// src/components/Navbar.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -13,6 +13,7 @@ const Navbar = () => {
       {currentUser ? (
         <>
           <span>{currentUser.email}</span>
+          <Link to="/addpost">Add Post</Link>
           <button onClick={logout}>Logout</button>
         </>
       ) : (

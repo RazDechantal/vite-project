@@ -1,27 +1,53 @@
-import React, { createContext, useState } from 'react';
+// src/context/BlogContext.jsx
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const BlogContext = createContext();
 
 const BlogProvider = ({ children }) => {
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'First Post', author: 'Jane Doe', text: 'This is the first post', comments: [] },
-    { id: 2, title: 'Second Post', author: 'Jane Doe', text: 'This is the second post', comments: [] },
-  ]);
+  const [posts, setPosts] = useState([]);
 
-  const addPost = (title, text, author) => {
-    setPosts([...posts, { id: posts.length + 1, title, text, author, comments: [] }]);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const postsCollection = collection(db, 'posts');
+      const postSnapshot = await getDocs(postsCollection);
+      const postList = postSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setPosts(postList);
+    };
+
+    fetchPosts();
+  }, []);
+
+  const addPost = async (title, text, author) => {
+    const newPost = {
+      title,
+      text,
+      author,
+      comments: [],
+    };
+    const docRef = await addDoc(collection(db, 'posts'), newPost);
+    setPosts([...posts, { id: docRef.id, ...newPost }]);
   };
 
-  const updatePost = (id, title, text) => {
+  const updatePost = async (id, title, text) => {
+    const postRef = doc(db, 'posts', id);
+    await updateDoc(postRef, { title, text });
     setPosts(posts.map(post => (post.id === id ? { ...post, title, text } : post)));
   };
 
-  const deletePost = (id) => {
+  const deletePost = async (id) => {
+    const postRef = doc(db, 'posts', id);
+    await deleteDoc(postRef);
     setPosts(posts.filter(post => post.id !== id));
   };
 
-  const addComment = (postId, username, text) => {
-    setPosts(posts.map(post => (post.id === postId ? { ...post, comments: [...post.comments, { username, text }] } : post)));
+  const addComment = async (postId, username, text) => {
+    const postRef = doc(db, 'posts', postId);
+    const post = posts.find(post => post.id === postId);
+    const updatedPost = { ...post, comments: [...post.comments, { username, text }] };
+    await updateDoc(postRef, { comments: updatedPost.comments });
+    setPosts(posts.map(post => (post.id === postId ? updatedPost : post)));
   };
 
   return (
