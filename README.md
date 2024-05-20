@@ -120,10 +120,12 @@ Ensure that your Firestore security rules allow authenticated users to read and 
 service cloud.firestore {
   match /databases/{database}/documents {
     match /posts/{post} {
-      allow read, write: if request.auth != null;
+      allow read: if true;
+      allow write: if request.auth != null;
     }
   }
 }
+
 ```
 
 To set up these rules:
