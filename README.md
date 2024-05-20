@@ -26,31 +26,33 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ## Project Structure
 
+
 ```
 src/
 |-- components/
-|   |-- BlogPost.jsx
-|   |-- BlogPostList.jsx
-|   |-- Comment.jsx
-|   |-- CommentList.jsx
-|   |-- Navbar.jsx
-|   |-- PrivateRoute.jsx
-|   |-- ErrorBoundary.jsx
+| |-- BlogPost.jsx
+| |-- BlogPostList.jsx
+| |-- Comment.jsx
+| |-- CommentList.jsx
+| |-- Navbar.jsx
+| |-- PrivateRoute.jsx
+| |-- ErrorBoundary.jsx
 |-- context/
-|   |-- AuthContext.jsx
-|   |-- BlogContext.jsx
+| |-- AuthContext.jsx
+| |-- BlogContext.jsx
 |-- pages/
-|   |-- HomePage.jsx
-|   |-- MyPostsPage.jsx
-|   |-- LoginPage.jsx
-|   |-- SignupPage.jsx
-|   |-- AddPostPage.jsx
+| |-- HomePage.jsx
+| |-- MyPostsPage.jsx
+| |-- LoginPage.jsx
+| |-- SignupPage.jsx
+| |-- AddPostPage.jsx
 |-- App.jsx
 |-- App.css
 |-- index.jsx
 |-- firebase.js
 |-- vite.config.js
 ```
+
 
 - **components/**: Contains reusable React components.
 - **context/**: Contains context providers for managing global state.
@@ -84,7 +86,6 @@ src/
    ```sh
    git clone <repository-url>
    cd vite-project
-   ```
 
 2. **Install dependencies**:
 
