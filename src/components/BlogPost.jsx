@@ -1,4 +1,4 @@
-// src/components/BlogPost.js
+// src/components/BlogPost.jsx
 import React, { useContext, useState } from 'react';
 import { BlogContext } from '../context/BlogContext';
 import { useAuth } from '../context/AuthContext';
@@ -56,7 +56,7 @@ const BlogPost = ({ post }) => {
         <input value={commentText} onChange={(e) => setCommentText(e.target.value)} placeholder="Add a comment" />
         <button onClick={handleAddComment}>Add Comment</button>
       </div>
-      <CommentList comments={post.comments} />
+      <CommentList comments={post.comments || []} />
     </div>
   );
 };

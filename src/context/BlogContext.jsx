@@ -5,6 +5,7 @@ import { db } from '../firebase';
 
 const BlogContext = createContext();
 
+// src/context/BlogContext.jsx
 const BlogProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
 
@@ -12,23 +13,24 @@ const BlogProvider = ({ children }) => {
     const fetchPosts = async () => {
       const postsCollection = collection(db, 'posts');
       const postSnapshot = await getDocs(postsCollection);
-      const postList = postSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const postList = postSnapshot.docs.map(doc => ({ id: doc.id, comments: [], ...doc.data() }));
       setPosts(postList);
     };
 
     fetchPosts();
   }, []);
 
-  const addPost = async (title, text, author) => {
-    const newPost = {
-      title,
-      text,
-      author,
-      comments: [],
-    };
-    const docRef = await addDoc(collection(db, 'posts'), newPost);
-    setPosts([...posts, { id: docRef.id, ...newPost }]);
+// src/context/BlogContext.jsx
+const addPost = async (title, text, author) => {
+  const newPost = {
+    title,
+    text,
+    author,
+    comments: [], // Initialize comments as an empty array
   };
+  const docRef = await addDoc(collection(db, 'posts'), newPost);
+  setPosts([...posts, { id: docRef.id, ...newPost }]);
+};
 
   const updatePost = async (id, title, text) => {
     const postRef = doc(db, 'posts', id);
