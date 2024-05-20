@@ -1,4 +1,4 @@
-Sure, here is a README file for your project, including a relevant table of contents:
+Here is a README file to the project, including a relevant table of contents:
 
 ---
 
